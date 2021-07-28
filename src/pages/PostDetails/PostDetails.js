@@ -45,7 +45,7 @@ const PostDetails = () => {
           <Typography variant="h3" component="h2">{post.title}</Typography>
           <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
           <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="h6">Created by: {post.name}</Typography>
+          <Typography variant="h6">Created by: <span className={classes.userLink} onClick={()=> history.push(`/users/${post.creator}`)}>{post.name}</span></Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
           <Divider style={{ margin: '20px 0' }} />
           <Typography gutterBottom variant="body1" component="p">{post.message}</Typography>

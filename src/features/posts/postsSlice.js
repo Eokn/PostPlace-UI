@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice, createSelector } from '@reduxjs/toolkit';
-import { fetchPosts, createPost, updatePost, deletePost, likePost, fetchPostsBySearch, fetchPostReco, createComment, likeComment, deleteComment } from '../../api';
+import { fetchPosts, createPost, updatePost, deletePost, likePost, fetchPostsBySearch, fetchPostReco, fetchUserInfo, createComment, likeComment, deleteComment } from '../../api';
 import { socket } from '../../app/socket';
 
 const initialState = {
   currentPostId:'',
   posts:[],
   comments:[],
+  userInfo:[],
   currentPage:1,
   numberOfPages:1,
   status: 'idle',
@@ -17,6 +18,15 @@ export const getAllPosts = createAsyncThunk(
   'posts/fetchAll',
   async (page) => {
     const response = await fetchPosts(page);
+    const { data } = response
+    return data;
+  }
+);
+
+export const getSingleUserInfo = createAsyncThunk(
+  'posts/fetchSingleUser',
+  async (id) => {
+    const response = await fetchUserInfo(id);
     const { data } = response
     return data;
   }
@@ -198,6 +208,13 @@ export const postsSlice = createSlice({
         state.posts = action.payload.posts
         state.comments = action.payload.comments
       })
+      .addCase(getSingleUserInfo.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getSingleUserInfo.fulfilled, (state,action) => {
+        state.status = 'idle';
+        state.userInfo = action.payload.userInfo
+      })
       .addCase(saveNewComment.fulfilled, (state,action) => {
         state.status = 'idle';
         state.comments.unshift(action.payload)
@@ -221,6 +238,8 @@ export const { editPost, socketUpdatePost, socketDeletePost, socketAddPost, sock
 export const selectCurrentPost = createSelector(state => state.posts.posts, state => state.posts.currentPostId, (posts,currentPost) => currentPost === '' ? false : posts.find(post => post._id === currentPost))
 
 export const selectPaginationInfo = createSelector(state => state.posts.posts, state => state.posts.currentPage, state => state.posts.numberOfPages, (posts,currentPage,numberOfPages) => ({ posts, currentPage, numberOfPages}))
+
+export const selectUserInfo = createSelector(state => state.posts.userInfo, info => info[0])
 
 export const selectPosts = createSelector(state => state.posts.posts, posts => posts)
 

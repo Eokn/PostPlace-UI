@@ -46,6 +46,14 @@ export default makeStyles((theme) => ({
       margin: '0 auto',
     },
   },
+  userLink: {
+    cursor:'pointer',
+    fontWeight:'600',
+    letterSpacing:'.025rem',
+    "&:hover":{
+      borderBottom:'3px solid #e1bee7'
+    }
+  },
   recommendedPosts: {
     display: 'flex',
     width:'100%',

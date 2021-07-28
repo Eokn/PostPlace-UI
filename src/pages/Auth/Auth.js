@@ -82,7 +82,7 @@ const Auth = () => {
                         <Input name='password' label='Password' handleChange={handleChange} type={!showPassword ? 'password' : 'text' } handleShowPassword={handleShowPassword} />
                         {isSignUp && ( <Input name='confirmPassword' label='Repeat Password' handleChange={handleChange} type='password' /> )}
                     </Grid>
-                    <GoogleLogin clientId='830598857724-350aat63ttisijo2j3jiv0njn2lal9k1.apps.googleusercontent.com' render={(props) => ( <Button className={classes.googleButton} color='secondary' fullWidth onClick={props.onClick} disabled={props.disabled} startIcon={ <FcGoogle className={classes.iconBackground}/> } variant='contained'  >Sign in with google</Button> )} onSuccess={googleSuccess} onFailure={googleFailure} cookiepolicy='single_host_origin'/>
+                    <GoogleLogin clientId={process.env.REACT_APP_CLIENTID} render={(props) => ( <Button className={classes.googleButton} color='secondary' fullWidth onClick={props.onClick} disabled={props.disabled} startIcon={ <FcGoogle className={classes.iconBackground}/> } variant='contained'  >Sign in with google</Button> )} onSuccess={googleSuccess} onFailure={googleFailure} cookiepolicy='single_host_origin'/>
                     <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit} > {isSignUp ? 'Sign up' : 'Sign In'} </Button>
                     <Typography variant='h5'>Or...</Typography>
                     <Button fullWidth variant='contained' color='primary' className={classes.submit} onClick={()=>{dispatch(signUpAuth({formData:{ firstName:'', lastName:'', email:'guest@mail.com', password:'guest123', confirmPassword:'guest123' }, history}))}} > Use Guest account </Button>
