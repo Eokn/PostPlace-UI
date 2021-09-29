@@ -24,6 +24,7 @@ import { deepPurple } from '@material-ui/core/colors';
           backgroundColor: deepPurple[500],
           width:'3rem',
           height:'3rem',
+          cursor:'pointer',
         },
         marginLeft: {
             marginLeft: '1rem',
@@ -46,6 +47,11 @@ import { deepPurple } from '@material-ui/core/colors';
         name:{
             fontWeight:'600',
             letterSpacing:'.025rem',
+            cursor:'pointer',
+            "&:hover":{
+                borderBottom:`1px solid ${theme.palette.secondary.main}`,
+                lineHeight: '1.42',
+            }
         },
         submit:{
             margin:'auto 0 0 .375rem',

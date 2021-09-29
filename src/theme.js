@@ -11,6 +11,14 @@ const theme = createMuiTheme({
       main: '#e1bee7',
     },
   },
+  overrides: {
+      MuiAvatar: {
+          colorDefault: {
+              color: '#fff',
+              backgroundColor: '#673ab7',
+          },
+      },
+    },
 })
 
 export default theme

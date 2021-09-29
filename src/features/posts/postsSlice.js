@@ -129,7 +129,7 @@ export const postsSlice = createSlice({
       if(state.posts.find(x => x._id === action.payload._id) !== undefined) {
         state.posts = state.posts.map(x => x._id === action.payload._id ? action.payload : x )
       }
-    },
+    },//I think I should be trying to do it here. socketAddPost/socketDeletePost should account for the fact that multiple page types exist, rather than relying on length. Maybe add a pageType field to the state, and update it upon arriving to a new page.
     socketDeletePost: (state, action) => {
       state.posts = state.posts.filter(x => x._id !== action.payload._id)
     },

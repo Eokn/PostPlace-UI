@@ -50,10 +50,10 @@ const Comments = () => {
               {comments.map(comment => {
                   const didCreateThisComment = comment.creator === user?.result?.googleId || comment.creator === user?.result?._id
                   return (<div className={classes.flexForMessage} key={comment._id} >
-                  <Avatar className={classes.avatar} >{comment.name.charAt(0).toUpperCase()}</Avatar>
+                  <Avatar className={classes.avatar} onClick={() => history.push(`/users/${comment.creator}`)}>{comment.name.charAt(0).toUpperCase()}</Avatar>
                   <div className={classes.userStats}>
                       <div className={classes.flexForNameDate}>
-                        <Typography variant='body2' className={classes.name} >{comment.name}</Typography>
+                        <Typography variant='body2' className={classes.name} onClick={() => history.push(`/users/${comment.creator}`)} >{comment.name}</Typography>
                         <Typography variant='body2' className={classes.date} >{moment(comment.createdAt).fromNow()}</Typography>
                       </div>
                       <Typography variant='body2'>{comment.message}</Typography>

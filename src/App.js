@@ -11,6 +11,7 @@ import PostDetails from './pages/PostDetails/PostDetails.js';
 import { socket } from './app/socket.js'
 import { useSelector } from 'react-redux';
 import { selectProfileExists } from './features/auth/authSlice.js';
+import UserDetails from './pages/UserDetails/UserDetails.js';
 
 function App() {
   const classes = useStyles()
@@ -37,6 +38,7 @@ function App() {
               <Route path='/posts/search' exact component={Home} />
               <Route path='/posts/:id' component={PostDetails} />
               <Route path='/auth' exact component={()=> !signedIn ? <Auth /> : <Redirect to='/posts' />} />
+              <Route path='/users/:id' component={UserDetails} />
             </Switch>
             </Container>
           </BrowserRouter>

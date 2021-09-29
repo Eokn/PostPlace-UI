@@ -52,7 +52,7 @@ const Auth = () => {
         }
 
     }
-    const googleFailure = () => {console.log('Google sign in unsuccessful.')}
+    const googleFailure = (err) => {console.log(`err: ${err.error} details: ${err.details}`)}
     const switchMode = () => {
         setIsSignUp(x => !x)
         setShowPassword(false)
@@ -60,8 +60,8 @@ const Auth = () => {
     return (
         <Container component='main' disableGutters maxWidth='xs' >
             <Paper className={classes.paper} elevation={3}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                <Avatar className={classes.avatar} children={(<LockOutlinedIcon className={classes.signIn}/>)}>
+                    
                 </Avatar>
                 <Typography variant='h5'>
                     {isSignUp ? 'Sign Up' : 'Sign In'}
@@ -71,7 +71,7 @@ const Auth = () => {
                         {
                             isSignUp && (
                                 <>
-                                    
+
                                     <Input name='firstName' label='First Name' handleChange={handleChange} autoFocus half/>
                                     
                                     <Input name='lastName' label='Last Name' handleChange={handleChange} half/>

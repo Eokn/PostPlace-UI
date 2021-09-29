@@ -30,7 +30,7 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    auth: (state, action) => {
+    auth: (state, action) => {//THIS must have a userId... I think?
       localStorage.setItem('profile', JSON.stringify({ ...action?.payload }))
       state.profile = action?.payload
     },

@@ -25,7 +25,7 @@ const Form = () => {
             dispatch(updateOldPost({id: currentPost._id, postData, name:profile?.result?.name, editor: profile?.result?.googleId || profile?.result?._id}))
         }
 
-        else{
+        else{ //IF the google-loaded profile has a result.name, the new created posts will have a proper structure.
             dispatch(saveNewPost({postData, name:profile?.result?.name, editor: profile?.result?.googleId || profile?.result?._id}))
         }
         clear()
