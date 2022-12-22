@@ -39,7 +39,11 @@ export const getSinglePostReco = createAsyncThunk(
   async (id) => {
     const response = await fetchPostReco(id);
     const { data } = response
+    if(data.status !== 404){
     return data;
+    } else {
+      return "error";
+    }
   }
 );
 
@@ -232,8 +236,14 @@ export const postsSlice = createSlice({
       })
       .addCase(getSinglePostReco.fulfilled, (state,action) => {
         state.status = 'idle';
-        state.posts = action.payload.posts
-        state.comments = action.payload.comments
+          state.posts = action.payload.posts
+          state.comments = action.payload.comments
+        
+      })
+      .addCase(getSinglePostReco.rejected, (state, action) => {
+        state.status = 'idle';
+          state.posts = [];
+          state.comments = [];
       })
       .addCase(getSingleUserInfo.pending, (state) => {
         state.status = 'loading';

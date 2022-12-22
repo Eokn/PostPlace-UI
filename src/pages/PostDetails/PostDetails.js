@@ -35,7 +35,7 @@ const PostDetails = () => {
 
     /* Make sure post exists, render component. Could alternatively check for loading once for both comments and recommended posts,
     but I prefer to have the two sections have their own circles. */
-
+    if(!post && !loading) return (<Paper elevation={6} > Sorry, we couldn't find that post in our database. </Paper> )
     if(!post) return (<Paper className={classes.loadingPaper} elevation={6} > <CircularProgress size='7rem' color='secondary' /> </Paper> )
     return (
         
