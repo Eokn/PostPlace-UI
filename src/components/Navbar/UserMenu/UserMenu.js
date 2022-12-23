@@ -5,14 +5,14 @@ import { useHistory } from 'react-router-dom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home'
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
-const UserMenu = ({ user, logout }) => {
+import ChatIcon from '@material-ui/icons/Chat';
+const UserMenu = ({ user, logout, navRef }) => {
     const history = useHistory()
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     function handleClick(event) {
-        // console.log(Document.getElementById('Nav'));
-        setAnchorEl(event.currentTarget);
+        setAnchorEl(navRef);
     }
 
     function handleClose() {
@@ -24,29 +24,6 @@ const UserMenu = ({ user, logout }) => {
         setAnchorEl(null);
     }
 
-//     const StyledMenu = withStyles({
-//   paper: {
-//     border: '1px solid #d3d4d5',
-//   },
-// })((props) => (
-//   <Menu
-//     elevation={0}
-//     getContentAnchorEl={null}
-    
-//     {...props}
-//   />
-// ));
-
-// const StyledMenuItem = withStyles((theme) => ({
-//   root: {
-//     '&:focus': {
-//       backgroundColor: theme.palette.primary.main,
-//       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-//         color: theme.palette.common.white,
-//       },
-//     },
-//   },
-// }))(MenuItem);
 
 
   return (
@@ -59,7 +36,7 @@ const UserMenu = ({ user, logout }) => {
         getContentAnchorEl={null}
         anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'left',
+            horizontal: 'right',
         }}
         transformOrigin={{
             vertical: 'top',
@@ -80,7 +57,12 @@ const UserMenu = ({ user, logout }) => {
           </ListItemIcon>
           <ListItemText primary="Profile" primaryTypographyProps={{ color:'secondary' }}/>
         </MenuItem>
-        
+        <MenuItem onClick={() => handleSelect(()=>history.push(`/users/${user.googleId || user._id}`))} className={classes.listItem}>
+          <ListItemIcon>
+            <ChatIcon fontSize="small" color='secondary'/>
+          </ListItemIcon>
+          <ListItemText primary="Chat" primaryTypographyProps={{ color:'secondary' }}/>
+        </MenuItem>
         <MenuItem onClick={() => handleSelect(()=>logout())} className={classes.listItem}>
           <ListItemIcon>
             <ExitToAppIcon fontSize="small" color='secondary'/>

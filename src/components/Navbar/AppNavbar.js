@@ -105,7 +105,7 @@ const AppNavbar = () => {
                 {user.result ? (
                     <div className={classes.profile}>
                         <Typography className={classes.userName} variant='h6' onClick={() => history.push(`/users/${user.result.googleId || user.result._id}`)} >{user.result.name}</Typography>
-                        <UserMenu user={user.result} logout={logout}/>
+                        <UserMenu user={user.result} logout={logout} navRef={navRef.current}/>
                     </div>
                 ) : (
                     

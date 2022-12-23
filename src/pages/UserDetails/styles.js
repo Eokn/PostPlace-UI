@@ -74,5 +74,19 @@ export default makeStyles((theme) => ({
                 marginBottom:'1rem',
             },
         },
-  }
+  },
+  deleteAllOne:{
+      display:'flex',
+      justifyContent:'center',
+      alignItems:'center',
+      marginLeft:'1rem',
+      flexWrap:'nowrap',
+      [theme.breakpoints.down('436')]:{
+            justifyContent:'center',
+            flexWrap:'wrap',
+            "& button:first-child":{
+                marginBottom:'1rem',
+            },
+        },
+  },
 }))

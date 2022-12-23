@@ -33,6 +33,12 @@ const UserDetails = () => {
             <Typography variant='h3'>{`${ownPage ? 'Your' : userInfo?.name + "'s"} activity feed`}</Typography>
             <Divider style={{ margin: '8px 0' }} />
                 <Typography variant='h3'>No user actions found.</Typography>
+                {ownPage && (<div className={classes.deleteAllOne}>
+                {delPopupInfo.show ? ( <Deletepopup turnOff={setDelPopupInfo} {...delPopupInfo} /> ) : ''}
+                <Button variant='contained' color='secondary' onClick={()=>setDelPopupInfo({...delPopupInfo, show:true, mode:'account', items:userInfo.info})} >
+                Delete Account
+                </Button>
+            </div>)}
         </Paper>
     )
 
