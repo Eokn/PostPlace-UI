@@ -217,7 +217,9 @@ export const postsSlice = createSlice({
       })
       .addCase(deleteOldPost.fulfilled, (state,action) => {
         state.posts = state.posts.filter(post => post._id !== action.payload)
-        state.userInfo[0].info = state.userInfo[0].info.filter(post => post._id !== action.payload)
+        if(state.userInfo.length > 0) {
+          state.userInfo[0].info = state.userInfo[0].info.filter(post => post._id !== action.payload) 
+        }
       })
       .addCase(likeOldPost.fulfilled, (state,action) => {
         state.posts = state.posts.map(post => post._id === action.payload._id ? action.payload : post)
@@ -266,7 +268,9 @@ export const postsSlice = createSlice({
         console.log('so here i am in the addcase section with my data..')
         console.log(action.payload)
         state.comments = state.comments.filter(comment => comment._id !== action.payload)
+        if(state.userInfo.length > 0) {
         state.userInfo[0].info = state.userInfo[0].info.filter(comment => comment._id !== action.payload)
+        }
       })
       .addCase(deleteAllContent.fulfilled, (state,action) => {
         state.userInfo[0].info = []
