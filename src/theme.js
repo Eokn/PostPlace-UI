@@ -18,6 +18,11 @@ const theme = createTheme({
               backgroundColor: '#673ab7',
           },
       },
+      MuiMenu: {
+        paper: {
+          border: '1px solid #e1bee7',
+        },
+      },
     },
 })
 

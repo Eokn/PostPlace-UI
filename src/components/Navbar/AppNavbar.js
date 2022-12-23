@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { auth, authLogout, selectProfile, selectProfileExists } from '../../features/auth/authSlice'
 import { socketAddPost, socketDeletePost, socketUpdatePost, socketAddComment, socketDeleteComment, socketUpdateComment, selectOnPostDetails, updateOnPostDetails } from '../../features/posts/postsSlice'
 import { socket } from '../../app/socket'
+import UserMenu from './UserMenu/UserMenu'
+import { useRef } from 'react'
 
 const AppNavbar = () => {
     const currentLoc = useLocation()
@@ -21,6 +23,8 @@ const AppNavbar = () => {
     const classes = useStyles()
     const [user, setUser] = React.useState(profile)
     const dispatch = useDispatch();
+    const navRef = useRef(null);
+
     React.useEffect(()=>{
         console.log(currentLoc.pathname, '/posts/:id', matchPath(currentLoc.pathname, '/posts/:id'), matchPath(currentLoc.pathname, '/posts/:id')?.isExact )
         if ( matchPath(currentLoc.pathname, '/posts/:id')?.isExact !== onPostDetails ) {
@@ -92,7 +96,7 @@ const AppNavbar = () => {
     
 
     return (
-        <AppBar className={classes.appBar} color='background' position='fixed' >
+        <AppBar className={classes.appBar} color='background' position='fixed' ref={navRef}>
             <Link className={classes.brandContainer} to='/'>
             <PhotoLibraryIcon className={classes.image} color='secondary'  />
             <Typography className={classes.heading} color='secondary' variant='h2' align='center'>PostPlace</Typography>
@@ -100,9 +104,8 @@ const AppNavbar = () => {
             <Toolbar className={classes.toolbar}>
                 {user.result ? (
                     <div className={classes.profile}>
-                        <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageURL || ''} onClick={() => history.push(`/users/${user.result.googleId || user.result._id}`)} >{user.result.name.charAt(0)}</Avatar>
                         <Typography className={classes.userName} variant='h6' onClick={() => history.push(`/users/${user.result.googleId || user.result._id}`)} >{user.result.name}</Typography>
-                        <Button variant='contained' className={classes.logout} color='secondary' onClick={logout}>Logout</Button>
+                        <UserMenu user={user.result} logout={logout}/>
                     </div>
                 ) : (
                     
