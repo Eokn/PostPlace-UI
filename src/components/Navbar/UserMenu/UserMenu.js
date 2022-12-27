@@ -6,9 +6,12 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import HomeIcon from '@material-ui/icons/Home'
 import AccountBoxIcon from '@material-ui/icons/AccountBox'
 import ChatIcon from '@material-ui/icons/Chat';
+import { toggleChat } from '../../../features/chat/chatSlice'
+import { useDispatch, useSelector } from 'react-redux'
 const UserMenu = ({ user, logout, navRef }) => {
     const history = useHistory()
     const classes = useStyles()
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     function handleClick(event) {
@@ -23,7 +26,8 @@ const UserMenu = ({ user, logout, navRef }) => {
         f();
         setAnchorEl(null);
     }
-
+    //onclick for chat should open a chat window in the bottom right of the screen. Perhaps a third 'chat' slice which contains list of chat messages and overall state?
+    //onclick flips a boolean to show or hide it?
 
 
   return (
@@ -57,7 +61,7 @@ const UserMenu = ({ user, logout, navRef }) => {
           </ListItemIcon>
           <ListItemText primary="Profile" primaryTypographyProps={{ color:'secondary' }}/>
         </MenuItem>
-        <MenuItem onClick={() => handleSelect(()=>history.push(`/users/${user.googleId || user._id}`))} className={classes.listItem}>
+        <MenuItem onClick={() => handleSelect(()=>{dispatch(toggleChat())})} className={classes.listItem}>
           <ListItemIcon>
             <ChatIcon fontSize="small" color='secondary'/>
           </ListItemIcon>
