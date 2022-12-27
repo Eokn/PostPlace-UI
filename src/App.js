@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { selectProfileExists } from './features/auth/authSlice.js';
 import UserDetails from './pages/UserDetails/UserDetails.js';
 import { selectShowChat } from './features/chat/chatSlice.js';
+import Chat from './components/Chat/Chat.js';
 
 function App() {
   const appRef = useRef(null);
@@ -43,7 +44,7 @@ function App() {
               <Route path='/auth' exact component={()=> !signedIn ? <Auth /> : <Redirect to='/posts' />} />
               <Route path='/users/:id' component={UserDetails} />
             </Switch>
-            {chatShowing ? 'absolute placed scrolling chat component goes hereaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' : ''}
+            { chatShowing ? <Chat appRef={appRef} /> : '' }
             </Container>
           </BrowserRouter>
         </ThemeProvider>
