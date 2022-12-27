@@ -15,6 +15,7 @@ export default makeStyles((theme) => ({
     borderRadius: '0.25rem',
     margin: 'auto',
     padding: '.25rem',
+    zIndex: '2',
   },
   warningText: {
       margin:'1rem auto',

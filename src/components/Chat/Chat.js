@@ -11,13 +11,13 @@ const Chat = ( { appRef } ) => {
     const dispatch = useDispatch();
 
     return (
-            <Paper className={classes.chatContainer}>
+        <Paper className={classes.chatContainer}>
                 <div className={classes.topSection}>
                     <Typography align='center' variant='h5'>Live Chat</Typography>
                     <ClearIcon color='secondary'  cursor='pointer' className={classes.deleteButton} onClick={()=>dispatch(toggleChat())} />
-                    </div>
-                <ChatMessages/>
-                </Paper>
+                </div>
+            <ChatMessages/>
+        </Paper>
     )
     
 }

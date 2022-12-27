@@ -38,6 +38,15 @@ export default makeStyles((theme) => ({
   },
   messageContainer: {
     width: '100%',
+    borderBottom: '3px solid white',
+    overflow: 'auto',
+    maxHeight: 300,
+    '&::-webkit-scrollbar': {
+        width: '0.5em',
+    },
+    '&::-webkit-scrollbar-thumb': {
+    backgroundColor: theme.palette.secondary.main,
+    },
   },
   message:{
     borderBottom: '2px solid white',
