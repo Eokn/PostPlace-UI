@@ -5,6 +5,7 @@ import { selectShowChat } from '../../features/chat/chatSlice';
 import useStyles from './styles'
 import ClearIcon from '@material-ui/icons/Clear'
 import { toggleChat } from '../../features/chat/chatSlice'
+import ChatMessages from './ChatMessages/ChatMessages'
 const Chat = ( { appRef } ) => {
     const classes = useStyles()
     const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Chat = ( { appRef } ) => {
                     <Typography align='center' variant='h5'>Live Chat</Typography>
                     <ClearIcon color='secondary'  cursor='pointer' className={classes.deleteButton} onClick={()=>dispatch(toggleChat())} />
                     </div>
-                Chat area goes here
+                <ChatMessages/>
                 </Paper>
     )
     

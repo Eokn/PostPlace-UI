@@ -11,39 +11,41 @@ export default makeStyles((theme) => ({
     alignItems:'center',
     width: '40vw',
     maxWidth:'400px',
-    border: '2px solid #555',
+    border: '2px solid white',
     borderRadius: '0.25rem',
     margin: 'auto',
     padding: '.25rem',
+    backgroundColor: theme.palette.secondary.main,
   },
-  warningText: {
-      margin:'1rem auto',
-      fontSize:'2rem',
-    
+  senderText: {
+    cursor: 'pointer',
+    fontWeight: '600',
+    letterSpacing: '.025rem',
+    width: 'fit-content',
+    "&:hover":{
+        borderBottom: '3px solid #e1bee7',
+        lineHeight: '1.3',
+        paddingTop: '3px',
+      },
   },
-  warningDescription: {
-    margin:'auto',
-    textAlign:'center',
+  timestampText: {
+    color: '#ccc',
+    padding: '0.25rem 0 0 0.75rem',
   },
-  buttonGroup: {
-    margin: '2rem',
-    [theme.breakpoints.down('350')]: {
-      margin:'1rem',
-    },
+  nameAndStamp: {
+    display: 'flex',
+    alignItems: 'center',
   },
-  submit: {
-    margin: theme.spacing(2, 0, 2),
+  messageContainer: {
+    width: '100%',
   },
-  googleButton: {
-    marginTop: theme.spacing(2),
-  },
-  iconBackground: {
-      backgroundColor: 'white',
+  message:{
+    borderBottom: '2px solid white',
+    padding: '.25rem 0',
   },
   deleteButton:{
       position:'absolute',
-        
-    color: theme.palette.secondary.main,
+        color:'black',
       top:'.5rem',
       right:'.5rem',
       transition:'transform .175s ease-in-out',
