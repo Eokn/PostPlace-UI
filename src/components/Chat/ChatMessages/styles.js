@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { deepPurple } from '@material-ui/core/colors';
 
 export default makeStyles((theme) => ({
   chatContainer: {
@@ -17,6 +18,39 @@ export default makeStyles((theme) => ({
     padding: '.25rem',
     backgroundColor: theme.palette.secondary.main,
   },
+  flexForMessage:{
+            display:'flex',
+            margin: '.75rem 0',
+        },
+        flexForForm:{
+            display:'flex',
+            width:'100%',
+            [theme.breakpoints.down('500')]:{
+                flexDirection:'column',
+                width:'calc(100% - 4.25rem)',
+            },
+        },
+    accountIcon: {
+          fontSize: '3rem',
+          
+        },
+        avatar: {
+          color: theme.palette.getContrastText(deepPurple[500]),
+          backgroundColor: deepPurple[500],
+          width:'3rem',
+          height:'3rem',
+          cursor:'pointer',
+        },
+        marginLeft: {
+            marginLeft: '1rem',
+        },
+        submit:{
+            margin:'auto 0 0 .375rem',
+            width: 'fit-content',
+            [theme.breakpoints.down('500')]:{
+                margin:'.5rem 0 .25rem auto'
+            },
+        },
   senderText: {
     cursor: 'pointer',
     fontWeight: '600',

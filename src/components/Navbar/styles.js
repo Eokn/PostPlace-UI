@@ -45,6 +45,20 @@ export default makeStyles((theme) => ({
     justifyContent: 'space-between',
     width: '100%',
   },
+  notLoggedIn: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    width: '100%',
+    '& .MuiIconButton-root': {
+      marginRight: '1.5rem',
+    padding:'6px',
+    },
+  },
+  chatOpener: {
+    
+  
+  },
   userName: {
     display: 'flex',
     alignItems: 'center',

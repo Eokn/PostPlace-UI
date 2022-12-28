@@ -6,12 +6,14 @@ import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary'
 import useStyles from './styles'
 import decode from 'jwt-decode'
 import {Link, useHistory, useLocation, matchPath} from 'react-router-dom'
-import { Avatar, Button } from '@material-ui/core'
+import { Avatar, Button, ButtonBase, IconButton } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { auth, authLogout, selectProfile, selectProfileExists } from '../../features/auth/authSlice'
 import { socketAddPost, socketDeletePost, socketUpdatePost, socketAddComment, socketDeleteComment, socketUpdateComment, selectOnPostDetails, updateOnPostDetails } from '../../features/posts/postsSlice'
 import { socket } from '../../app/socket'
 import UserMenu from './UserMenu/UserMenu'
+import { toggleChat } from '../../features/chat/chatSlice'
+import ChatIcon from '@material-ui/icons/Chat';
 import { useRef } from 'react'
 
 const AppNavbar = () => {
@@ -92,6 +94,7 @@ const AppNavbar = () => {
         dispatch(authLogout())
         history.push('/')
         setUser({})
+        dispatch(toggleChat())
     }
     
 
@@ -108,8 +111,13 @@ const AppNavbar = () => {
                         <UserMenu user={user.result} logout={logout} navRef={navRef.current}/>
                     </div>
                 ) : (
-                    
+                    <div className={classes.notLoggedIn}>
+                        <IconButton className={classes.chatOpener} >
+
+                        <ChatIcon color='secondary' fontSize='large' onClick={()=>dispatch(toggleChat())} />
+                        </IconButton>
                         <Button component={Link} to='/auth' variant='contained' color='secondary'>Sign in</Button>
+                    </div>
                     
                 )}
 
