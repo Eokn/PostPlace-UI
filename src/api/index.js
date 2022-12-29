@@ -44,3 +44,10 @@ export const apiSignIn = (formData) => API.post('/users/signin', formData)
 export const apiSignUp = (formData) => API.post('/users/signup', formData)
 
 export const apiGoogleSignUp = ({ name, email }) => API.post('/users/googlesignup', { name, email })
+
+
+export const createChatMessage = (message, sender, senderId) => API.post(`/posts/${senderId}/chatMessage`, {message, sender, senderId})
+
+export const fetchChatMessages = () => API.get('/posts/chatMessage')
+
+// export const apiGoogleSignUp = ({ name, email }) => API.post('/users/googlesignup', { name, email })

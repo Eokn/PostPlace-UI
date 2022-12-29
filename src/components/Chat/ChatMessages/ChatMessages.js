@@ -3,9 +3,10 @@ import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { selectProfile, selectProfileExists } from '../../../features/auth/authSlice';
-import { addChatMessage, toggleChat, selectChatMessages, setChatMessages } from '../../../features/chat/chatSlice';
+import { addChatMessage, toggleChat, selectChatMessages, getChatMessages, saveNewChatMessage } from '../../../features/chat/chatSlice';
 import useStyles from './styles'
 import { AccountCircle } from '@material-ui/icons'
+import moment from 'moment'
 
 const ChatMessages = () => {
     const classes = useStyles()
@@ -19,7 +20,7 @@ const ChatMessages = () => {
     const [message, setMessage] = React.useState('')
     const fakeMessages = [{id:1,sender: 'What X', message:'hi my name is'},{id:2,sender: 'Guest 68', message:'what? I didnt catch that.'},{id:3,sender: 'What X', message: 'i said my name is who'},{id:4,sender: 'What X', message:'talking again for no reason lol anyone on?'},{id:5,sender: 'What Y', message:'hi what x did you see that one post'},{id:6,sender: 'What X', message:'yeah i did that was crazy'},{id:7,sender: 'What Y', message:'ikr lol'},]
     React.useEffect(()=> {
-        dispatch(setChatMessages(fakeMessages))
+        dispatch(getChatMessages())
     },[])
     React.useEffect(()=> {
         scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -32,7 +33,7 @@ const ChatMessages = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(addChatMessage({ id:chatMessages.length, message, sender:user.result.name }))
+        dispatch(saveNewChatMessage({ id:chatMessages.length, message, sender:user.result.name, senderId: user.result._id }))
         setMessage('')
         setSubmitVis(false)
     }
@@ -43,16 +44,16 @@ const ChatMessages = () => {
 
 
   return (
-    <div>
+    <div className={classes.chatMessageContainer}>
         <div className={classes.messageContainer} ref={scrollRef} >
         {chatMessages.map(x=> (
-            <div className={x != chatMessages[chatMessages.length-1] ? classes.message : ''} key={x.id+1}>
+            <div className={x != chatMessages[chatMessages.length-1] ? classes.message : ''} key={x._id}>
             <div className={classes.nameAndStamp}>
-            <Typography variant='h6' className={classes.senderText} onClick={()=> history.push(`/users/${x.id}`)}>{x.sender}</Typography>
-            <Typography variant='body2' className={classes.timestampText}>Timestamp : {x.id}</Typography>
+            <Typography variant='h6' className={classes.senderText} onClick={()=> history.push(`/users/${x.senderId}`)}>{x.sender}</Typography>
+            <Typography variant='body2' className={classes.timestampText}>{moment(x.createdAt).fromNow()}</Typography>
             </div>
 
-            <Typography>message : {x.message}</Typography>
+            <Typography>{x.message}</Typography>
         </div>))
         }
         </div>

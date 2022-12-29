@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, createSelector } from '@reduxjs/toolkit';
-import { apiSignUp, apiSignIn, apiGoogleSignUp } from '../../api/index.js';
+import { createChatMessage, fetchChatMessages, apiGoogleSignUp } from '../../api/index.js';
+import { socket } from '../../app/socket';
 
 const initialState = {
   chatMessages: [],
@@ -9,30 +10,62 @@ const initialState = {
 
 // Thunks for chat actions/retrieval --- WIP ---
 
-export const signUpAuth = createAsyncThunk(
-  'auth/signNewUp',
-  async ({formData,history}) => {
-    const { data } = await apiSignUp(formData)
-    history.goBack();
+// export const getAllPosts = createAsyncThunk(
+//   'posts/fetchAll',
+//   async (page) => {
+//     const response = await fetchPosts(page);
+//     const { data } = response
+//     return data;
+//   }
+// );
+
+// export const saveNewPost = createAsyncThunk(
+//   'posts/savePost',
+//   async ({postData, name, editor}) => {
+//     const { data } = await createPost(postData, name)
+//     socket.emit('addPost', {data,editor})
+//     return data
+//   }
+// )
+
+// export const deleteOldPost = createAsyncThunk(
+//   'posts/deletePost',
+//   async ({id,editor}) => {
+    
+//     const {data} = await deletePost(id)
+//     socket.emit('deletePost', {data,editor})
+//     return id
+//   }
+// )
+
+export const saveNewChatMessage = createAsyncThunk(
+  'posts/saveChatMessage',
+  async ({message, sender, senderId}) => {
+    const { data } = await createChatMessage(message, sender, senderId)
+    socket.emit('addChatMessage', {data,editor:senderId})
     return data
   }
 )
 
-export const signInAuth = createAsyncThunk(
-  'auth/signOldIn',
-  async({formData,history}) => {
-    const { data } = await apiSignIn(formData)
-    history.goBack();
-    return data
+export const getChatMessages = createAsyncThunk(
+  'posts/fetchChatMessages',
+  async () => {
+    const response = await fetchChatMessages();
+    const { data } = response
+    return data;
   }
-)
-export const googleSignUp = createAsyncThunk(
-  'auth/googleSignUp',
-  async({name, email}) => {
-    const { data } = await apiGoogleSignUp({name,email})
-    return data
-  }
-)
+);
+
+// export const deleteOldComment = createAsyncThunk(
+//   'posts/deleteComment',
+//   async ({belongsTo, id, editor}) => {
+    
+//     const { data } = await deleteComment(belongsTo, id)
+//     socket.emit('deleteComment', {data,editor})
+//     console.log('done with everything just need to send id out owo')
+//     return id
+//   }
+// )
 
 export const chatSlice = createSlice({
   name: 'chat',
@@ -50,17 +83,17 @@ export const chatSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signUpAuth.fulfilled, (state,action) => {
-        localStorage.setItem('profile', JSON.stringify({ ...action?.payload }))
-      state.profile = action?.payload
+      .addCase(saveNewChatMessage.fulfilled, (state,action) => {
+      
+      state.chatMessages.push(action.payload);
       })
-      .addCase(signInAuth.fulfilled, (state, action) => {
-        localStorage.setItem('profile', JSON.stringify({ ...action?.payload }))
-      state.profile = action?.payload
+      .addCase(getChatMessages.fulfilled, (state, action) => {
+
+      state.chatMessages = action?.payload.messages
       })
-      .addCase(googleSignUp.fulfilled, (state, action) => {
-        console.log(action.payload)
-      })
+      // .addCase(googleSignUp.fulfilled, (state, action) => {
+      //   console.log(action.payload)
+      // })
 
       
   },

@@ -12,7 +12,7 @@ import { auth, authLogout, selectProfile, selectProfileExists } from '../../feat
 import { socketAddPost, socketDeletePost, socketUpdatePost, socketAddComment, socketDeleteComment, socketUpdateComment, selectOnPostDetails, updateOnPostDetails } from '../../features/posts/postsSlice'
 import { socket } from '../../app/socket'
 import UserMenu from './UserMenu/UserMenu'
-import { toggleChat } from '../../features/chat/chatSlice'
+import { addChatMessage, toggleChat } from '../../features/chat/chatSlice'
 import ChatIcon from '@material-ui/icons/Chat';
 import { useRef } from 'react'
 
@@ -57,6 +57,7 @@ const AppNavbar = () => {
     socket.off('addedComment')
     socket.off('deletedComment')
     socket.off('updatedComment')
+    socket.off('addedChatMessage')
     socket.on('updatedPost', (data)=>{
         if((data.editor !== user?.result?._id) && (data.editor !== user?.result?.googleId) ) {
             dispatch(socketUpdatePost(data.data))
@@ -85,6 +86,11 @@ const AppNavbar = () => {
     socket.on('deletedComment', (data)=>{
         if((data.editor !== user?.result?._id) && (data.editor !== user?.result?.googleId) ) {
             dispatch(socketDeleteComment(data.data))
+        } 
+    })
+    socket.on('addedChatMessage', (data)=>{
+        if((data.editor !== user?.result?._id) && (data.editor !== user?.result?.googleId) ) {
+            dispatch(addChatMessage(data.data))
         } 
     })
     

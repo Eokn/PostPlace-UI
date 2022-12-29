@@ -101,5 +101,8 @@ export default makeStyles((theme) => ({
     paddingBottom: '.25rem',
     borderBottom: '3px solid white',
     width: '100%',
-  }
+  },
+  chatMessageContainer: {
+    width: '100%',
+  },
 }));
