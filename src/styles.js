@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from 'tss-react/mui';
 
-export default makeStyles((theme) => ({
+export default makeStyles()((theme) => ({
   //marginTop to account for fixed navbar.
   appContainer: {
     padding:'0 1rem',

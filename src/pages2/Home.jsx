@@ -2,7 +2,7 @@ import { useState } from 'react'
 import heroImg from '../assets/hero.png'
 import reactLogo from '../assets/react.svg'
 import viteLogo from '../assets/vite.svg'
-import { fetchPosts } from '../api'
+import { fetchPosts } from '../app/api'
 import imgArr from '../imgArr'
 
 const Home = () => {
