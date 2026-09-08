@@ -8,10 +8,16 @@ import useStyles from './styles'
 const Input = ({ half, handleChange, label, autoFocus, type, handleShowPassword, name }) => {
 const { classes } = useStyles()
     return (
-        <Grid xs='6' sm={half?'6':'12'} >
-            <TextField name={name} onChange={handleChange} color='secondary' variant='outlined' required fullWidth label={label} autoFocus={autoFocus} type={type} InputProps={name === 'password' ? {
-                endAdornment: ( <InputAdornment className={classes.iconToggle} position='end'> <IconButton onClick={handleShowPassword} size="large"> {type==='password' ? <Visibility /> : <VisibilityOff /> } </IconButton> </InputAdornment> )
-            } : null } />
+        <Grid size={{xs:6, sm: half ? 6:12}} >
+            <TextField name={name} onChange={handleChange} 
+            color='secondary' variant='outlined' required fullWidth 
+            label={label} autoFocus={autoFocus} type={type} 
+            slotProps={name === 'password' ? {
+                input: { endAdornment: ( <InputAdornment className={classes.iconToggle} position='end'> 
+                <IconButton onClick={handleShowPassword} size="large"> 
+                    {type==='password' ? <Visibility /> : <VisibilityOff /> } 
+                    </IconButton> </InputAdornment> ) }
+            } : '' } />
         </Grid>
     );
 }

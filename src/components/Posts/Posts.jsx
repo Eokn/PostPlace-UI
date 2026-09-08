@@ -18,7 +18,7 @@ const Posts = () => {
         loading ? (<Paper className={classes.loadingPaper} ><CircularProgress size='7em' color='secondary' /></Paper>  ) : (
         <Grid className={classes.container} container sx={{ alignItems: 'stretch' }} spacing={2}>
             {posts.map(post => (
-            <Grid key={post._id} xs={12} sm={6} md={4} lg={3}  >
+            <Grid key={post._id} size={{xs:12, sm:6, md:4, lg:3}}  >
                 <Post post={post}/>
             </Grid>))}
         </Grid>)

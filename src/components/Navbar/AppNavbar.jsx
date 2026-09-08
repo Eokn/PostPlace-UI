@@ -115,14 +115,15 @@ const AppNavbar = () => {
                 {user.result ? (
                     <div className={classes.profile}>
                         <Typography className={classes.userName} variant='h6' onClick={() => navigate(`/users/${user.result.googleId || user.result._id}`)} >{user.result.name}</Typography>
+                        {/* <IconButton className={classes.chatOpener} size="large">
+                            <ChatIcon color='secondary' fontSize='large' 
+                            onClick={()=>dispatch(toggleChat())} />
+                        </IconButton> */}
                         <UserMenu user={user.result} logout={logout} navRef={navRef.current}/>
                     </div>
                 ) : (
                     <div className={classes.notLoggedIn}>
-                        <IconButton className={classes.chatOpener} size="large">
 
-                        <ChatIcon color='secondary' fontSize='large' onClick={()=>dispatch(toggleChat())} />
-                        </IconButton>
                         <Button component={Link} to='/auth' variant='contained' color='secondary'>Sign in</Button>
                     </div>
                     

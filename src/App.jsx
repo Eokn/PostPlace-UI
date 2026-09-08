@@ -43,7 +43,7 @@ function App() {
             <Route path='/posts' exact element={<Home/>} />
             <Route path='/posts/search' exact element={<Home/>} />
             <Route path='/posts/:id' element={<PostDetails/>} />
-            <Route path='/auth' exact element={(()=> !signedIn ? <Auth /> : <Navigate to='/posts' />)()} />
+            <Route path='/auth' exact element={(()=> !signedIn ? <Auth /> : <Navigate to='/posts' replace />)()} />
             <Route path='/users/:id' element={<UserDetails/>} />
           </Routes>
           { chatShowing ? <Chat appRef={appRef} /> : '' }
