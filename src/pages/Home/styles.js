@@ -29,11 +29,25 @@ export default makeStyles()((theme) => ({
     marginBottom: '1rem',
     padding: '.5rem',
   },
+  searchAndCreationGrid: {
+    display:'flex',
+    flexDirection:'column',
+    [theme.breakpoints.up('sm')]:{
+      maxWidth:'600px',
+      margin:'auto'
+
+    },
+    [theme.breakpoints.up('lg')]:{
+      maxWidth:'300px',
+    },
+  },
   pagination: {
     borderRadius: 4,
     marginTop: '1rem',
     padding: '.75rem .25rem',
     bottom: '0',
+    width:'fit-content',
+
   },
   paginationSmall: {
     borderRadius: 4,
@@ -45,7 +59,7 @@ export default makeStyles()((theme) => ({
     },
   },
   marginAdjust: {
-    margin: '3rem 0 1rem 0',
+    margin: '3rem auto 1.25rem auto',
     
   },
   

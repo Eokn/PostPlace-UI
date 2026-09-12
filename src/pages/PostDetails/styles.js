@@ -4,12 +4,12 @@ import { makeStyles } from 'tss-react/mui';
 export default makeStyles()((theme) => ({
     paperContainer:{
         padding: '.5rem',
-        borderRadius: '1rem',
+        borderRadius: '.25rem',
         border: '1px solid #555',
         marginBottom: '1rem',
     },
   media: {
-    borderRadius: '1rem',
+    borderRadius: '.25rem',
     objectFit: 'cover',
     maxHeight: '600px',
     margin: 'auto',
@@ -71,7 +71,7 @@ export default makeStyles()((theme) => ({
     backgroundBlendMode: 'darken',
     display: 'block',
     textAlign: 'initial',
-    borderRadius: '1rem',
+    borderRadius: '.25rem',
     border: '1px solid #777',
     maxWidth: '240px',
     "& h6": {
@@ -84,7 +84,12 @@ export default makeStyles()((theme) => ({
     },
   },
   loadingPaper: {
-    display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '1rem', borderRadius: '1rem', height: '39vh',
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    padding: '1rem', 
+    borderRadius: '1rem', 
+    height: '39vh',
   },
   nameAndDate:{
     display:'flex',
@@ -103,8 +108,8 @@ export default makeStyles()((theme) => ({
         },
   cardPic:{
     borderRadius:'0px',
-    borderBottomLeftRadius: '1rem',
-    borderBottomRightRadius: '1rem',
+    borderBottomLeftRadius: '.25rem',
+    borderBottomRightRadius: '.25rem',
     position: 'relative',
     bottom: '-3px',
     maxHeight:'134px',

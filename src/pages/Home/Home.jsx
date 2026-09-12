@@ -68,6 +68,7 @@ const Home = () => {
   const handleDelete = (tag) => {
     setTags(tags.filter(x=>x!==tag))
   }
+  console.log(signedIn)
     return (
         <Grow in>
             <Container className={classes.appContainer} maxWidth='xl'>
@@ -77,12 +78,13 @@ const Home = () => {
                     <MuiChipsInput value={tags} color='secondary' margin='dense' onAddChip={handleAdd} onDeleteChip={handleDelete} className={classes.chipInput} label='Search By Tags' variant='outlined' />
                     <Button variant='contained' onClick={searchPosts} className={classes.searchButton} color='primary' >Search <SearchIcon fontSize='small' /> </Button>
                   </AppBar></Grid> )}
-                <Grid size={{xs:12, sm:!signedIn ? 12 : 7, md:!signedIn ? 12 : 9}} className={classes.heightFix}>
+                <Grid size="grow" 
+                className={classes.heightFix}>
                   <Posts />
                 </Grid>
-                {signedIn && (<Grid size={{xs:12, sm:5, md:3}}>
+                {signedIn && (<Grid className={classes.searchAndCreationGrid}>
                   <AppBar position='static' color='inherit' className={classes.appBarSearchSigned} >
-                    <TextField name='search' color='secondary' variant='outlined' label='Search Posts' fullWidth value={search} onKeyPress={handleKeyPress} onChange={(e)=>{setSearch(e.target.value)}} />
+                    <TextField name='search' color='secondary' variant='outlined' label='Search Posts' fullWidth value={search} onKeyDown={handleKeyPress} onChange={(e)=>{setSearch(e.target.value)}} />
                     <MuiChipsInput value={tags} color='secondary' onAddChip={handleAdd} onDeleteChip={handleDelete} className={classes.chipInput} label='Search By Tags' variant='outlined' />
                     <Button variant='contained' onClick={searchPosts} color='primary' >Search <SearchIcon fontSize='small' /> </Button>
                   </AppBar>

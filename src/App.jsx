@@ -22,18 +22,23 @@ function App() {
   const signedIn = useSelector(selectProfileExists)
   const chatShowing = useSelector(selectShowChat)
   React.useEffect(()=>{
-    socket.on('connect', ()=>{
+    const handleConnect = () => {
       console.log('connected to server')
-    })
+    }
+    socket.on('connect', handleConnect)
+
+    if(socket.connected){
+      handleConnect()
+    }
     
     
 
-    return () => { socket.disconnect() }
+    return () => { socket.off('connect'), handleConnect }
   },[])
 
   return (
     <StyledEngineProvider injectFirst>
-      (<ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <BrowserRouter>
           <AppNavbar/>
           <Container maxWidth='xl' className={classes.appContainer} ref={appRef}>
@@ -49,7 +54,7 @@ function App() {
           { chatShowing ? <Chat appRef={appRef} /> : '' }
           </Container>
         </BrowserRouter>
-      </ThemeProvider>)
+      </ThemeProvider>
     </StyledEngineProvider>
   );
 }

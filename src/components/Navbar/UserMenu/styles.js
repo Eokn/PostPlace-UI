@@ -64,5 +64,8 @@ export default makeStyles()((theme) => ({
       backgroundColor: theme.palette.primary.main,
       
     },
+    '&:hover':{
+      backgroundColor: theme.palette.primary.main,
+    },
   }
 }));

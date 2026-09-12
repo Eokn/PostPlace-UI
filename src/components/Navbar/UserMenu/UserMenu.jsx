@@ -32,12 +32,13 @@ const UserMenu = ({ user, logout, navRef }) => {
 
   return (
     <div>
-        <Avatar className={classes.purple} alt={user.name} src={user.imageURL || ''} onClick={(e) => handleClick(e)} >{user.name.charAt(0)}</Avatar>
+        <Avatar className={classes.purple} alt={user.name} src={user.imageURL || ''} 
+        onClick={(e) => handleClick(e)} >{user.name.charAt(0)}</Avatar>
         <Menu
         id="user-menu"
         anchorEl={anchorEl}
         keepMounted
-        getContentAnchorEl={null}
+        disableAutoFocusItem
         anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right',
@@ -53,25 +54,25 @@ const UserMenu = ({ user, logout, navRef }) => {
           <ListItemIcon>
             <HomeIcon fontSize="small" color='secondary' />
           </ListItemIcon>
-          <ListItemText primary="Home" primaryTypographyProps={{ color:'secondary' }}/>
+          <ListItemText primary="Home" slotProps={{ primary: { color: 'secondary' } }} />
         </MenuItem>
         <MenuItem onClick={() => handleSelect(()=>navigate(`/users/${user.googleId || user._id}`))} className={classes.listItem}>
           <ListItemIcon>
             <AccountBoxIcon fontSize="small" color='secondary'/>
           </ListItemIcon>
-          <ListItemText primary="Profile" primaryTypographyProps={{ color:'secondary' }}/>
+          <ListItemText primary="Profile" slotProps={{ primary: { color: 'secondary' } }} />
         </MenuItem>
         <MenuItem onClick={() => handleSelect(()=>{dispatch(toggleChat())})} className={classes.listItem}>
           <ListItemIcon>
             <ChatIcon fontSize="small" color='secondary'/>
           </ListItemIcon>
-          <ListItemText primary="Chat" primaryTypographyProps={{ color:'secondary' }}/>
+          <ListItemText primary="Chat" slotProps={{ primary: { color: 'secondary' } }} />
         </MenuItem>
         <MenuItem onClick={() => handleSelect(()=>logout())} className={classes.listItem}>
           <ListItemIcon>
             <ExitToAppIcon fontSize="small" color='secondary'/>
           </ListItemIcon>
-          <ListItemText primary="Sign out" primaryTypographyProps={{ color:'secondary' }}/>
+          <ListItemText primary="Sign out" slotProps={{ primary: { color: 'secondary' }}} />
         </MenuItem>
       </Menu>
     </div>

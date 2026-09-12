@@ -27,6 +27,12 @@ const AppNavbar = () => {
     const [user, setUser] = React.useState(profile)
     const dispatch = useDispatch();
     const navRef = useRef(null);
+    const logout = () => {
+        dispatch(authLogout())
+        navigate('/')
+        setUser({})
+        //dispatch(toggleChat())
+    }
 
     React.useEffect(()=>{
         console.log(currentLoc.pathname, '/posts/:id', matchPath(currentLoc.pathname, '/posts/:id'), matchPath(currentLoc.pathname, '/posts/:id')?.isExact )
@@ -97,12 +103,7 @@ const AppNavbar = () => {
     
 
   },[exists, user])
-    const logout = () => {
-        dispatch(authLogout())
-        navigate('/')
-        setUser({})
-        dispatch(toggleChat())
-    }
+
     
 
     return (
@@ -111,7 +112,7 @@ const AppNavbar = () => {
             <PhotoLibraryIcon className={classes.image} color='secondary'  />
             <Typography className={classes.heading} color='secondary' variant='h2' align='center'>PostPlace</Typography>
             </Link>
-            <Toolbar className={classes.toolbar}>
+            <Toolbar className={classes.toolbar} sx={{ minHeight:'3rem !important' }}>
                 {user.result ? (
                     <div className={classes.profile}>
                         <Typography className={classes.userName} variant='h6' onClick={() => navigate(`/users/${user.result.googleId || user.result._id}`)} >{user.result.name}</Typography>

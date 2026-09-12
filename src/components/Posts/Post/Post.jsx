@@ -40,9 +40,14 @@ const didCreateThisPost = post.creator === profile?.result?.googleId || post.cre
                 <Typography variant='h6' >{post.name}</Typography>
                 <Typography variant='body2' >{dayjs(post.createdAt).fromNow()}</Typography>
             </div>
-            {didCreateThisPost && !userPage && (<div className={classes.overlay2} >
-                <Button color='primary' size='small' onClick={handleSelect} > <MoreHorizIcon /> </Button>
-            </div>)}
+            {didCreateThisPost && !userPage && 
+            (<div className={classes.overlay2}>
+                <Button color='secondary' component='div'
+                size='small' onClick={handleSelect} > 
+                <MoreHorizIcon /> 
+                </Button>
+            </div>)
+            }
             
             <div className={classes.details} >
                 <Typography variant='body2' >{post.tags.map(tag => `#${tag} `)}</Typography>
@@ -53,8 +58,17 @@ const didCreateThisPost = post.creator === profile?.result?.googleId || post.cre
             </CardContent>
                 </ButtonBase>
             <CardActions className={classes.cardActions} >
-                <Button color='secondary' size='small' disabled={!signedIn} component={userPage ? 'div' : 'button'} onClick={()=>{dispatch(likeOldPost({id:post._id, editor: profile?.result?.googleId || profile?.result?._id}))}} > <Likes item={post} /> </Button>
-                {didCreateThisPost && (<Button color='secondary' size='small' disabled={!signedIn} onClick={()=>{dispatch(deleteOldPost({id:post._id, editor: profile?.result?.googleId || profile?.result?._id}))}} > <DeleteIcon fontSize='small' /> &nbsp; Delete  </Button>)}
+                <Button color='secondary' size='small' disabled={!signedIn} 
+                className={classes.cardIndividualActions}
+                component={userPage ? 'div' : 'button'} 
+                onClick={()=>{dispatch(likeOldPost({
+                    id:post._id, editor: profile?.result?.googleId || profile?.result?._id}))}} > 
+                    <Likes item={post} /> </Button>
+                {didCreateThisPost && (<Button color='secondary' size='small' 
+                disabled={!signedIn} className={classes.cardIndividualActions}
+                 onClick={()=>{dispatch(deleteOldPost({id:post._id,
+                  editor: profile?.result?.googleId || profile?.result?._id}))}} > 
+                  <DeleteIcon fontSize='small' /> &nbsp; Delete  </Button>)}
             </CardActions>
         </Card>
     )

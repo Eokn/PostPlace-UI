@@ -60,10 +60,22 @@ const Comments = () => {
                       <Typography variant='body2'>{comment.message}</Typography>
                       <div className={classes.flexForLikeAndDelete}>
                           <div className={`${!signedIn ? classes.greyOut : ''} ${classes.flexForLikeAndDelete}`} >
-                              <IconButton className={classes.button} color='secondary' size='small' disabled={!signedIn} onClick={()=>{dispatch(likeOldComment({belongsTo:id, id:comment._id, editor: user?.result?._id || user?.result?.googleId}))}} > <Likes item={comment} noText />  </IconButton>
+                              <IconButton className={classes.button} 
+                              color='secondary' size='small' disabled={!signedIn} 
+                              onClick={()=>{dispatch(likeOldComment(
+                                {belongsTo:id, id:comment._id, 
+                                editor: user?.result?._id || user?.result?.googleId}))}} > 
+                                <Likes item={comment} noText />  
+                                </IconButton>
                           &nbsp;{comment.likes.length}
                           </div>
-                          {didCreateThisComment && (<Button className={classes.marginTopAdjust} color='secondary' variant='outlined' size='small' onClick={()=>{dispatch(deleteOldComment({belongsTo:id, id:comment._id, editor: user?.result?._id || user?.result?.googleId}))}} > <DeleteIcon fontSize='small' />  Delete  </Button>)}
+                          {didCreateThisComment && (
+                            <Button className={classes.marginTopAdjust} color='secondary' 
+                            variant='outlined' size='small' 
+                            onClick={()=>{dispatch(deleteOldComment({belongsTo:id, 
+                            id:comment._id, editor: user?.result?._id || user?.result?.googleId}))}} > 
+                            <DeleteIcon fontSize='small' />  Delete  
+                            </Button>)}
                       </div>
                   </div>
               </div>)}) }
