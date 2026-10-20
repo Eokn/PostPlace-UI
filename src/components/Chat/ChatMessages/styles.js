@@ -21,40 +21,48 @@ export default makeStyles()((theme) => ({
   flexForMessage:{
             display:'flex',
             margin: '.75rem 0',
+            width:'100%',
         },
         flexForForm:{
             display:'flex',
-            width:'100%',
+            // width:'100%',
+            flexDirection:'column',
+            width:'calc(100% - 2.75rem)',
             [theme.breakpoints.down('500')]:{
                 flexDirection:'column',
-                width:'calc(100% - 4.25rem)',
+                width:'calc(100% - 2.75rem)',
             },
         },
     accountIcon: {
-          fontSize: '3rem',
+          fontSize: '2rem',
           
         },
         avatar: {
           color: theme.palette.getContrastText(deepPurple[500]),
           backgroundColor: deepPurple[500],
-          width:'3rem',
-          height:'3rem',
+          width:'2rem',
+          height:'2rem',
           cursor:'pointer',
         },
         marginLeft: {
-            marginLeft: '1rem',
+            marginLeft: '.25rem',
+            backgroundColor:'#1d1d1d',
+            borderRadius:'.2rem',
+            minWidth:'150px',
         },
         submit:{
-            margin:'auto 0 0 .375rem',
+            // margin:'auto 0 0 .375rem',
             width: 'fit-content',
-            [theme.breakpoints.down('500')]:{
-                margin:'.5rem 0 .25rem auto'
-            },
+            margin:'.5rem auto .25rem auto',
+            // [theme.breakpoints.down('500')]:{
+            //     margin:'.5rem 0 .25rem .25rem', // Temp change to column
+            // },
         },
   senderText: {
     cursor: 'pointer',
     fontWeight: '600',
-    letterSpacing: '.025rem',
+    // letterSpacing: '.025rem',
+    fontSize:'1.25rem',
     width: 'fit-content',
     "&:hover":{
         borderBottom: '3px solid #e1bee7',
@@ -64,6 +72,8 @@ export default makeStyles()((theme) => ({
   },
   timestampText: {
     color: '#ccc',
+    marginLeft: 'auto',
+    marginRight:'.25rem',
     padding: '0.25rem 0 0 0.75rem',
   },
   nameAndStamp: {
@@ -72,19 +82,19 @@ export default makeStyles()((theme) => ({
   },
   messageContainer: {
     width: '100%',
-    borderBottom: '3px solid white',
+    borderBottom: '3px solid grey',
     overflow: 'auto',
     maxHeight: 300,
     '&::-webkit-scrollbar': {
-        width: '0.5em',
+        width: '0.25em',
     },
     '&::-webkit-scrollbar-thumb': {
     backgroundColor: theme.palette.secondary.main,
     },
   },
   message:{
-    borderBottom: '2px solid white',
-    padding: '.25rem 0',
+    borderBottom: '2px solid grey',
+    padding: '.1rem 0',
   },
   deleteButton:{
       position:'absolute',

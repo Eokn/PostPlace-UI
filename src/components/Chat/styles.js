@@ -9,7 +9,8 @@ export default makeStyles()((theme) => ({
     flexDirection:'column',
     justifyContent:'center',
     alignItems:'center',
-    width: '40vw',
+    width: '75vw',
+    minWidth:'250px',
     maxWidth:'400px',
     border: '2px solid #555',
     borderRadius: '0.25rem',
@@ -55,7 +56,7 @@ export default makeStyles()((theme) => ({
   },
   topSection:{
     paddingBottom: '.25rem',
-    borderBottom: '3px solid white',
+    borderBottom: '3px solid grey',
     width: '100%',
   }
 }));

@@ -21,6 +21,14 @@ import { MuiChipsInput } from 'mui-chips-input'
                     //       console.log('set the posts!', reader.result)
                     //     }
                     // }
+                    const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+};
 
       //               <input 
       //   type="file" 
@@ -81,7 +89,13 @@ const Form = () => {
   const handleDeleteChip = (chipToDelete) => {
     setPostData({ ...postData, tags: postData.tags.filter((tag) => tag !== chipToDelete) });
   };
-
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const base64 = await convertToBase64(file);
+      setPostData({ ...postData, selectedFile: base64 });
+    }
+  };
 
     if(!profileExists) {
         return (
@@ -107,9 +121,9 @@ const Form = () => {
                 <TextField required color='secondary' name='message' variant='outlined' label='Message' multiline rows={4} fullWidth value={postData.message} onChange={(e)=>setPostData({...postData, message: e.target.value})}/>
                 <MuiChipsInput color='secondary' className={classes.addMargin} name="tags" variant="outlined" label="Tags" fullWidth value={postData.tags} onAddChip={(chip) => handleAddChip(chip)} onDeleteChip={(chip) => handleDeleteChip(chip)} />
                 <div className={classes.fileInput}>
-                    {/* <FileBase type='file' multiple={false} 
-                    onDone={(base64)=>setPostData({...postData, selectedFile:base64})} />
-                 */}
+                    <input type='file' multiple={false} accept="image/*" 
+                    onChange={handleFileUpload} />
+                
                 </div>
                 <Button className={classes.buttonSubmit} variant='contained' color='primary' size='large' type='submit' disabled={postData.title.length === 0 || postData.message.length === 0 } fullWidth >Submit</Button>
                 <Button  variant='contained' color='secondary' size='small' onClick={clear} fullWidth >Clear</Button>

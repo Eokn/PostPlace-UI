@@ -44,7 +44,7 @@ export default makeStyles()((theme) => ({
   },
   profile: {
     display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     width: '100%',
   },
   notLoggedIn: {
@@ -71,6 +71,7 @@ export default makeStyles()((theme) => ({
     display: 'flex',
     alignItems: 'center',
     cursor:'pointer',
+    marginRight:'.25rem',
   },
   brandContainer: {
     display: 'flex',

@@ -12,7 +12,7 @@ import { auth, authLogout, selectProfile, selectProfileExists } from '../../feat
 import { socketAddPost, socketDeletePost, socketUpdatePost, socketAddComment, socketDeleteComment, socketUpdateComment, selectOnPostDetails, updateOnPostDetails } from '../../features/posts/postsSlice'
 import { socket } from '../../app/socket'
 import UserMenu from './UserMenu/UserMenu'
-import { addChatMessage, toggleChat } from '../../features/chat/chatSlice'
+import { addChatMessage, getChatMessages, toggleChat } from '../../features/chat/chatSlice'
 import ChatIcon from '@mui/icons-material/Chat';
 import { useRef } from 'react'
 
@@ -40,6 +40,7 @@ const AppNavbar = () => {
             if(onPostDetails === ''){
                 console.log('update the value because first time on site', matchPath(currentLoc.pathname, '/posts/:id')?.isExact, onPostDetails)
                 dispatch(updateOnPostDetails(matchPath(currentLoc.pathname, '/posts/:id') !== null))
+                dispatch(getChatMessages())
             } else if( matchPath(currentLoc.pathname, '/posts/:id')?.isExact !== onPostDetails ){
                 console.log('update the state because the current page is different than the stored value', matchPath(currentLoc.pathname, '/posts/:id')?.isExact, onPostDetails)
                 dispatch(updateOnPostDetails(!onPostDetails))
@@ -124,7 +125,12 @@ const AppNavbar = () => {
                     </div>
                 ) : (
                     <div className={classes.notLoggedIn}>
-
+                        {
+                            
+                            <IconButton className={classes.chatOpener} size="large">
+                            <ChatIcon color='secondary' fontSize='large' 
+                            onClick={()=>dispatch(toggleChat())} />
+                        </IconButton>}
                         <Button component={Link} to='/auth' variant='contained' color='secondary'>Sign in</Button>
                     </div>
                     

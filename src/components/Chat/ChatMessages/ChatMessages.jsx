@@ -32,6 +32,7 @@ const ChatMessages = () => {
     }
 
     const handleSubmit = (e) => {
+        if (!user){return}
         e.preventDefault()
         dispatch(saveNewChatMessage({ id:chatMessages.length, message, sender:user.result.name, senderId: user.result._id }))
         setMessage('')
@@ -49,7 +50,7 @@ const ChatMessages = () => {
         {chatMessages.map(x=> (
             <div className={x != chatMessages[chatMessages.length-1] ? classes.message : ''} key={x._id}>
             <div className={classes.nameAndStamp}>
-            <Typography variant='h6' className={classes.senderText} onClick={()=> navigate(`/users/${x.senderId}`)}>{x.sender}</Typography>
+            <Typography variant='h6' className={classes.senderText} onClick={()=> navigate(`/users/${x.senderId}`)}>{x.sender.split(" ")[0] ? x.sender.split(" ")[0] : x.sender}</Typography>
             <Typography variant='body2' className={classes.timestampText}>{dayjs(x.createdAt).fromNow()}</Typography>
             </div>
 
@@ -67,8 +68,12 @@ const ChatMessages = () => {
                         }else {
                             toggleSubmitVis()
                             }}} 
-                    label="Enter a message..." variant="filled" size='small' color='secondary' />
-                    {submitVis && (<Button color='secondary' type='submit' disabled={message.trim().length === 0} variant='contained' className={classes.submit} >submit</Button>)}
+                     variant="standard" size='small' color='secondary' />
+                    {submitVis && (
+                        <Button color='secondary' type='submit'
+                        disabled={message.trim().length === 0} 
+                        variant='contained' 
+                        className={classes.submit} >submit</Button>)}
                   </form>
               </div>
     </div>

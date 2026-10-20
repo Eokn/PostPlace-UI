@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, createSelector } from '@reduxjs/toolkit';
 import { apiSignUp, apiSignIn, apiGoogleSignUp } from '../../app/api';
+import { getChatMessages } from '../chat/chatSlice';
 
 const initialState = {
   profile: {},
@@ -10,25 +11,36 @@ const initialState = {
 
 export const signUpAuth = createAsyncThunk(
   'auth/signNewUp',
-  async ({formData,navigate}) => {
+  async ({formData,navigate}, {dispatch}) => {
     const { data } = await apiSignUp(formData)
     navigate(-1);
+    try{
+      await dispatch(getChatMessages()).unwrap()
+    } catch (error) {
+      console.log('failed', error)
+    }
     return data
   }
 )
 
 export const signInAuth = createAsyncThunk(
   'auth/signOldIn',
-  async({formData,navigate}) => {
+  async({formData,navigate}, {dispatch}) => {
     const { data } = await apiSignIn(formData)
     navigate(-1);
+    try{
+      await dispatch(getChatMessages()).unwrap()
+    } catch (error) {
+      console.log('failed', error)
+    }
     return data
   }
 )
 export const googleSignUp = createAsyncThunk(
   'auth/googleSignUp',
-  async({name, email}) => {
+  async({name, email}, {dispatch}) => {
     const { data } = await apiGoogleSignUp({name,email})
+    await dispatch(getChatMessages()).unwrap()
     return data
   }
 )
