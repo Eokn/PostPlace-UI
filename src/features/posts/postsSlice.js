@@ -120,7 +120,6 @@ export const deleteOldComment = createAsyncThunk(
     
     const { data } = await deleteComment(belongsTo, id)
     socket.emit('deleteComment', {data,editor})
-    console.log('done with everything just need to send id out owo')
     return id
   }
 )
@@ -265,8 +264,6 @@ export const postsSlice = createSlice({
         state.comments = state.comments.map(comment => comment._id === action.payload._id ? action.payload : comment)
       })
       .addCase(deleteOldComment.fulfilled, (state,action) => {
-        console.log('so here i am in the addcase section with my data..')
-        console.log(action.payload)
         state.comments = state.comments.filter(comment => comment._id !== action.payload)
         if(state.userInfo.length > 0) {
         state.userInfo[0].info = state.userInfo[0].info.filter(comment => comment._id !== action.payload)

@@ -69,7 +69,7 @@ export const authSlice = createSlice({
       state.profile = action?.payload
       })
       .addCase(googleSignUp.fulfilled, (state, action) => {
-        console.log(action.payload)
+        // console.log(action.payload)
       })
 
       

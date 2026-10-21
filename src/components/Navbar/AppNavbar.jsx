@@ -35,14 +35,11 @@ const AppNavbar = () => {
     }
 
     React.useEffect(()=>{
-        console.log(currentLoc.pathname, '/posts/:id', matchPath(currentLoc.pathname, '/posts/:id'), matchPath(currentLoc.pathname, '/posts/:id')?.isExact )
         if ( matchPath(currentLoc.pathname, '/posts/:id')?.isExact !== onPostDetails ) {
             if(onPostDetails === ''){
-                console.log('update the value because first time on site', matchPath(currentLoc.pathname, '/posts/:id')?.isExact, onPostDetails)
                 dispatch(updateOnPostDetails(matchPath(currentLoc.pathname, '/posts/:id') !== null))
                 dispatch(getChatMessages())
             } else if( matchPath(currentLoc.pathname, '/posts/:id')?.isExact !== onPostDetails ){
-                console.log('update the state because the current page is different than the stored value', matchPath(currentLoc.pathname, '/posts/:id')?.isExact, onPostDetails)
                 dispatch(updateOnPostDetails(!onPostDetails))
             }
         }

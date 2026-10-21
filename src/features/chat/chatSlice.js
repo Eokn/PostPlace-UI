@@ -52,7 +52,6 @@ export const getChatMessages = createAsyncThunk(
   async () => {
     const response = await fetchChatMessages();
     const { data } = response
-    console.log(data, response)
     return data;
   }
 );

@@ -23,7 +23,6 @@ const UserDetails = () => {
     const ownPage = userInfo?.name !== undefined && userInfo?.name === profile?.result?.name 
     const [delPopupInfo, setDelPopupInfo] = React.useState({show:false, mode:'', items:''})
     React.useEffect(()=>{
-            console.log(userInfo)
             if(!loading){dispatch(getSingleUserInfo(id))}
 
     }, [id])
