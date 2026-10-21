@@ -11,19 +11,20 @@ Post Place is a social media application where users can make posts and interact
 - If you'd like to seed the database, run 'node dataSeeding' in the server directory.
 4. Connect your server to the clientside via .env files in client / server folders.
 - Optionally connect a google OAuth clientID to the front end if it isn't too much trouble and/or you want the google login to work.
-5. Run the client and server locally via the npm start command.
+5. Run the client and server locally via the npm run dev command.
 6. Navigate to the URL you chose for the clientside and the app should be running.
 
 ## Features
 
 1. A user can sign up for an account, sign in, sign in via google, or use a guest account.
-2. A user can search for posts fitting their criteria.
+2. A user can search for posts fitting their criteria and view the live chat.
 3. A user can visit registered users' pages where they can see an activity feed.
 4. A signed-in user can make, edit, delete, or like posts.
 5. A signed-in user can make, delete or like comments tied to a specific post by visiting its page.
-6. All actions where applicable will be displayed in real time to all users.
-7. Actions are saved to a database so data is persistent across visits.
-8. The site has different views dependent on window size and looks normal / functions properly down to 250px width.
+6. A signed-in user can use the live chat on any page of the site to chat with other users in real time.
+7. All actions where applicable will be displayed in real time to all users.
+8. Actions are saved to a database so data is persistent across visits.
+9. The site has different views dependent on window size and looks normal / functions properly down to 300px width.
 
 ### How to search for posts
 
@@ -57,6 +58,11 @@ Post Place is a social media application where users can make posts and interact
 2. Type out a comment in the text field below the picture and other information about the post.
 3. Click submit.
 4. Liking and deleting work similarly to posts. Click the thumb to like/unlike, click the delete button if you want to delete your comment.
+
+### Using the live chat
+1. If not signed in, click the chat icon in the top right to view the chat.
+2. If signed in, click your profile in the top right to bring up the menu, then click chat to bring up the chat.
+3. Type out a message in the chatbox and click submit. You can scroll up in the window to view other recent messages.
 
 ## Future features
 - Proper XSS protection. (If you visit the live version please don't blow my site up.)
