@@ -36,7 +36,11 @@ const PostDetails = () => {
     /* Make sure post exists, render component. Could alternatively check for loading once for both comments and recommended posts,
     but I prefer to have the two sections have their own circles. */
     if(!post && !loading) return (<Paper elevation={6} > Sorry, we couldn't find that post in our database. </Paper> )
+
     if(!post) return (<Paper className={classes.loadingPaper} elevation={6} > <CircularProgress size='7rem' color='secondary' /> </Paper> )
+
+    const imgArrNum = (post._id.split('').reduce((x,y)=>{return x+y.charCodeAt(0)},0))%5
+
     return (
         
         <Paper className={classes.paperContainer} elevation={6}>
@@ -52,7 +56,7 @@ const PostDetails = () => {
           <Button className={classes.button} color='secondary' size='small' disabled={!signedIn} onClick={()=>{dispatch(likeOldPost({id:post._id, editor: profile?.result?.googleId || profile?.result?._id}))}} > <Likes item={post} /> </Button>
         </div>
         <div className={classes.imageSection}>
-          <img className={classes.media} src={post.selectedFile || imgArr[Math.floor(Math.random()*5)]} alt={post.title} />
+          <img className={classes.media} src={post.selectedFile || imgArr[imgArrNum]} alt={post.title} />
         </div>
       </div>
 

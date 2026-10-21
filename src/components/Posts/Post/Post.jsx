@@ -1,6 +1,6 @@
 import React from 'react'
 import useStyles from './styles'
-import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase } from '@mui/material'
+import { Card, CardActions, CardContent, CardMedia, Button, Typography, ButtonBase, Paper, CircularProgress } from '@mui/material'
 
 import DeleteIcon from '@mui/icons-material/Delete'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -30,12 +30,18 @@ const openPost = () => {
 }
 
 const didCreateThisPost = post.creator === profile?.result?.googleId || post.creator === profile?.result?._id
-    
+
+if(!post) return (
+<Paper className={classes.loadingPaper} elevation={6} >
+    <CircularProgress size='3rem' color='secondary' />
+</Paper> )
+
+const imgArrNum = (post._id.split('').reduce((x,y)=>{return x+y.charCodeAt(0)},0))%5
     return (
         <Card className={classes.card}>
             <ButtonBase className={classes.cardAction} onClick={openPost} component={userPage ? 'div' : 'button'}>
 
-            <CardMedia className={classes.media} image={post.selectedFile || imgArr[Math.floor(Math.random()*5)]} title={post.title}/>
+            <CardMedia className={classes.media} image={post.selectedFile || imgArr[imgArrNum]} title={post.title}/>
             <div className={classes.overlay}  >
                 <Typography variant='h6' >{post.name}</Typography>
                 <Typography variant='body2' >{dayjs(post.createdAt).fromNow()}</Typography>
